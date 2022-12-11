@@ -1,3 +1,0 @@
-/home/thomas/prog/cplug/build/CMakeFiles/cplug.dir
-/home/thomas/prog/cplug/build/CMakeFiles/edit_cache.dir
-/home/thomas/prog/cplug/build/CMakeFiles/rebuild_cache.dir
