@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/thomas/prog/cplug/build",
+  "command": "/usr/bin/cc -I/home/thomas/prog/cplug/plugin_api -I/home/thomas/prog/cplug/include -I/home/thomas/prog/cplug/lib/tinycc -std=gnu90 -o CMakeFiles/cplug.dir/src/cplug.c.o -c /home/thomas/prog/cplug/src/cplug.c",
+  "file": "/home/thomas/prog/cplug/src/cplug.c"
+}
+]

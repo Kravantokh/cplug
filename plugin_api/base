@@ -1,0 +1,16 @@
+#ifndef PLUGIN_API_HEADER
+#define PLUGIN_API_HEADER
+
+typedef struct plug_api_string{
+	char* contents;
+	unsigned int length;
+}plug_api_string;
+
+#if NOT_PLUGIN != 0
+
+#define plug_api_string string
+
+#endif
+
+
+#endif
