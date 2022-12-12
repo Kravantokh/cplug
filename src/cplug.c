@@ -21,6 +21,8 @@ int main(void){
 	tcc_output_file(compiler, "./test.so");
 
 	tcc_set_options(compiler, "-shared -o test.so test.c");
+
+
 	tcc_run(compiler, 0, NULL);
 	
 	tcc_delete(compiler);
@@ -36,9 +38,8 @@ int main(void){
 	}
 
 	printf("Test result: %d", test() );
-
-
-
+	
+	dlclose(handle);
 
 	return EXIT_SUCCESS;
 }

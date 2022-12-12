@@ -1,3 +1,3 @@
 int test(void){
-	return 16;
+	return 18;
 }
