@@ -18,13 +18,14 @@ execute_process(
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc
 )
 
-add_executable(cplug src/cplug.c)
-
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/plugin_api
 	${CMAKE_CURRENT_SOURCE_DIR}/include
 	${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc
 )
+
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc)
+
+add_executable(cplug src/cplug.c)
 
 target_link_libraries(cplug tcc)

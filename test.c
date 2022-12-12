@@ -1,3 +1,3 @@
-int main(void){
-	return 12;
+int test(void){
+	return 16;
 }
