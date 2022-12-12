@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
+#include <math.h>
 #include "libtcc.h"
 #include "base"
 
@@ -32,12 +33,12 @@ int main(void){
 		fprintf(stderr, "Handle is NULL.\n");
 	}
 
-	int (*test)(void) = dlsym(handle, "test");
+	double (*test)(void) = dlsym(handle, "test");
 	if(test == NULL){
 		fprintf(stderr, "test fptr is NULL.\n");
 	}
 
-	printf("Test result: %d", test() );
+	printf("Test result: %f", test() );
 	
 	dlclose(handle);
 

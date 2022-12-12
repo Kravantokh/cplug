@@ -28,4 +28,4 @@ link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc)
 
 add_executable(cplug src/cplug.c)
 
-target_link_libraries(cplug tcc)
+target_link_libraries(cplug tcc m)
