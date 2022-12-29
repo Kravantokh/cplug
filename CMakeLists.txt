@@ -15,7 +15,15 @@ execute_process(
 )
 execute_process(
 	COMMAND make all
-	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc/
+)
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc/tcc
+	DESTINATION ${CMAKE_BINARY_DIR}/tcc
+)
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc/libtcc1.a
+	DESTINATION ${CMAKE_BINARY_DIR}/tcc
 )
 
 include_directories(

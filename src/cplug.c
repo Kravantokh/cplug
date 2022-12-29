@@ -2,31 +2,21 @@
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <math.h>
-#include "libtcc.h"
-#include "base"
-
-void tcc_err(void* opaque, const char* msg){
-	fprintf(stderr, "%s\n", msg);
-}
 
 int main(void){
-	printf("Creating compiler instance.\n");
-	TCCState* compiler = tcc_new();
 	
-	tcc_set_error_func(compiler, NULL, &tcc_err);
-	tcc_set_output_type(compiler, TCC_OUTPUT_DLL);
-	tcc_add_include_path(compiler, "./plugin_api");
-	tcc_add_library_path(compiler, "./lib/tinycc");
-	//tcc_add_library_path(compiler, "/usr/lib/");
-	tcc_add_file(compiler, "./test.c");
-	tcc_output_file(compiler, "./test.so");
+	char msg[256] = {0};
+	int ret = system("./tcc/tcc -L ./tcc/ -I ./tcc/ ./tcc/test.c -o tcc/a.out");
 
-	tcc_set_options(compiler, "-shared -o test.so test.c");
-
-
-	tcc_run(compiler, 0, NULL);
+	printf("Return value of tcc: %d\n", ret);
+	FILE* buf = popen("./tcc/a.out", "r");
 	
-	tcc_delete(compiler);
+	if( fgets (msg, 256, buf)!=NULL ) {
+      puts(msg);
+	}
+	ret = pclose(buf);
+	printf("Return value a.out: %d\n", ret);
+
 
 	void* handle = dlopen("./test.so", RTLD_LAZY | RTLD_LOCAL);
 	if(handle == NULL){
@@ -36,6 +26,7 @@ int main(void){
 	double (*test)(void) = dlsym(handle, "test");
 	if(test == NULL){
 		fprintf(stderr, "test fptr is NULL.\n");
+		return EXIT_FAILURE;
 	}
 
 	printf("Test result: %f", test() );
