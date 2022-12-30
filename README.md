@@ -24,7 +24,7 @@ This necessitates the passing of these function pointers when a plugin is loaded
 This initial pointer passing and the indirect dispatch done by pointers adds a little overhead which may or may not be of concern. Most likely it won't be, because these plugins are most likely faster than any scripting system such as lua or python anyway (! No benchamrks were done, just an *educated guess* !).
 
 ## Further possible improvements
-One recommendation for further safety would be to put all the plugins on one or multiple separate threads so that they do not have access to the stack of the host. After all the plugins are also written in C and thus could endager the host as well if the plugin/script writers do not take care. (Careless programming is never encouraged, but it can get especially bad in C).
+One recommendation for further safety would be to put all the plugins on one or multiple separate threads so that they do not have access to the stack of the host. After all, the plugins are also written in C and thus could endager the host as well if the plugin/script writers do not take great care. (Careless programming is never encouraged, but it can get especially destructive in C).
 
 For reasons (mainly laziness) I have not done any of this, but if I were to implement a plugin/scripting system like this in a serious application I would without a doubt go for it.
 
