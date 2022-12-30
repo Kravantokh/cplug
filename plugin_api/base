@@ -1,16 +1,55 @@
 #ifndef PLUGIN_API_HEADER
 #define PLUGIN_API_HEADER
 
+/* DISCLAIMER: This is not a convenient way to use this system of plugins.
+ * This file is just a proof-of-concept of what can be done.
+ * String allocation should be made easier inside "scripts", but I am too lazy
+ * to do that for an example. Maybe in a real plugin system.
+ */
+
+#ifndef NOT_PLUGIN
+	#define NOT_PLUGIN 0
+#else
+	#define NOT_PLUGIN 1
+#endif
+
+
+/* Common datatypes. */
 typedef struct plug_api_string{
-	char* contents;
-	unsigned int length;
+	char* contents;      /* Should still be null-terminated for ease-of-use with std functions. */
+	unsigned int length; /* Length without the null-terminator for easy iteration.*/
 }plug_api_string;
 
-#if NOT_PLUGIN != 0
+/* For isolation, easy modifiability and safety all functions
+ * will be called through pointers from the host.
+ * For this we need a structure.
+ * This structure is filled in by the host.*/
 
-#define plug_api_string string
+typedef struct plug_api_dispatch_table{
+	void* (*alloc)(unsigned int);     /* Allocate memory. */
+	void (*print)(plug_api_string);  /* Print a string. */
+}plug_api_dispatch_table;
+
+
+/* If inside a plugin: */
+#if NOT_PLUGIN == 0
+
+/* Some shorter names*/
+#define string plug_api_string
+
+/* A local instance of the dispatch table. */
+
+/* This macro should be called at the beginning of every "script" to populate
+ * the call table.
+ * The host will make sure to do its part and then the plugin can call functions
+ * via call.funcname (for example: call.alloc(12) )*/
+#define BEGIN plug_api_dispatch_table call;\
+void pre_init(plug_api_dispatch_table host_table){\
+	call = host_table;\
+}
 
 #endif
+
 
 
 #endif

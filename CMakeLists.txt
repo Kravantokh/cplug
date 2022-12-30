@@ -26,6 +26,13 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinycc/libtcc1.a
 	DESTINATION ${CMAKE_BINARY_DIR}/tcc
 )
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plugin_api/base
+	DESTINATION ${CMAKE_BINARY_DIR}/tcc
+)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/test.c
+	DESTINATION ${CMAKE_BINARY_DIR}/tcc
+)
+
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/plugin_api
 	${CMAKE_CURRENT_SOURCE_DIR}/include
